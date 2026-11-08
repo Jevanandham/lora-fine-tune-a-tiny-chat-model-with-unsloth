@@ -80,8 +80,19 @@ def attach_lora_adapters(model, r=8, lora_alpha=16, target_modules=None):
         r = r,
     )
 
-# Step 7 - count_trainable_parameters (not yet solved)
-# TODO: implement
+# Step 7 - count_trainable_parameters
+def count_trainable_parameters(model):
+    """Return the number of trainable parameters in `model`."""
+    # TODO: sum p.numel() over model.parameters() where requires_grad is True
+    parameters = 0
+
+    modules = model.parameters()
+
+    for module in modules:
+        if module.requires_grad == True:
+            parameters += module.numel()
+
+    return parameters
 
 # Step 8 - trainable_fraction (not yet solved)
 # TODO: implement
