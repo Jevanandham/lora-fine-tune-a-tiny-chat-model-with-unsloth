@@ -99,8 +99,24 @@ def trainable_fraction(trainable_count, total_count):
     # TODO: return the fraction of parameters that are trainable.
     return trainable_count / total_count
 
-# Step 9 - build_instruction_examples (not yet solved)
-# TODO: implement
+# Step 9 - build_instruction_examples
+def build_instruction_examples():
+    """Return a small list of {'instruction', 'response'} dicts for SFT."""
+    # TODO: return a tiny hand-written list of instruction/response example dicts.
+    return[
+       {
+        "instruction" : "Summarize the following sentence in five words or fewer: The quick brown fox jumps over the lazy dog.",
+        "response" : "Fox jumps over dog."
+       },
+       {
+        "instruction" : "When a customer requests a refund, first verify their purchase history in the database, confirm the item was bought within 30 days, and then issue the credit to their original payment method",
+        "response" : "Received. I will look up their account history, check the 30-day window, and process the refund back to their card."
+       },
+       {
+        "instruction" : "Turn left at the next traffic light.",
+        "response" : "Got it, turning left ahead."
+       },
+    ]
 
 # Step 10 - format_instruction_example (not yet solved)
 # TODO: implement
