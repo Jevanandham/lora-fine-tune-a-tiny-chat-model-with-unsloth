@@ -206,11 +206,6 @@ import trl
 def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=256):
     """Construct a trl SFTTrainer over dataset['text'] ready to .train()."""
     # TODO: wire model, tokenizer, dataset, and training_args into an SFTTrainer
-    
-    if hasattr(training_args, "save_strategy"):
-        training_args.save_strategy = "no"
-    if hasattr(training_args, "save_steps"):
-        training_args.save_steps = 999999
         
     return trl.SFTTrainer(
         model = model,
