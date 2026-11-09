@@ -176,6 +176,8 @@ def build_training_arguments(output_dir='./sft_out', max_steps=5, learning_rate=
             gradient_accumulation_steps = 1,
             logging_steps = 1,
             optim = "adamw_8bit",
+            save_strategy="no",
+            save_steps=999999, 
             fp16 = True,
             bf16 = False
         )
@@ -190,6 +192,8 @@ def build_training_arguments(output_dir='./sft_out', max_steps=5, learning_rate=
             gradient_accumulation_steps = 1,
             logging_steps = 1,
             optim = "adamw_8bit",
+            save_strategy="no",
+            save_steps=999999, 
             fp16 = False,
             bf16 = True
         )
@@ -202,6 +206,12 @@ import trl
 def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=256):
     """Construct a trl SFTTrainer over dataset['text'] ready to .train()."""
     # TODO: wire model, tokenizer, dataset, and training_args into an SFTTrainer
+    
+    if hasattr(training_args, "save_strategy"):
+        training_args.save_strategy = "no"
+    if hasattr(training_args, "save_steps"):
+        training_args.save_steps = 999999
+        
     return trl.SFTTrainer(
         model = model,
         tokenizer = tokenizer,
@@ -212,8 +222,15 @@ def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=2
         packing = False
     )
 
-# Step 17 - run_sft_training (not yet solved)
-# TODO: implement
+# Step 17 - run_sft_training
+def run_sft_training(trainer):
+    """Run a few SFT steps and return the final training loss as a float."""
+    # TODO: drive the trainer through its short optimization run and return the final loss
+    # Run the training loop
+    train_details = trainer.train()
+
+    # Extract the final loss cleanly from the metrics dictionary and return as float
+    return float(train_details.metrics['train_loss'])
 
 # Step 18 - switch_to_inference_mode (not yet solved)
 # TODO: implement
