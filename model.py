@@ -221,10 +221,8 @@ def build_sft_trainer(model, tokenizer, dataset, training_args, max_seq_length=2
 def run_sft_training(trainer):
     """Run a few SFT steps and return the final training loss as a float."""
     # TODO: drive the trainer through its short optimization run and return the final loss
-    # Run the training loop
     train_details = trainer.train()
-
-    # Extract the final loss cleanly from the metrics dictionary and return as float
+    
     return float(train_details.metrics['train_loss'])
 
 # Step 18 - switch_to_inference_mode (not yet solved)
